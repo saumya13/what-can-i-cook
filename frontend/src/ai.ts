@@ -1,6 +1,10 @@
 import { GoogleGenAI } from "@google/genai";
+import type { RecipeOptions } from "./types";
 
-export default async function getRecipeFromClaude(ingredients: string[]) {
+export default async function getRecipeFromClaude(
+  ingredients: string[],
+  options: RecipeOptions,
+) {
   const key = import.meta.env.VITE_API_KEY_CLAUDE;
   //console.log("key: ", key);
 
@@ -14,15 +18,24 @@ export default async function getRecipeFromClaude(ingredients: string[]) {
 - Use --- on its own line for separators
 - Do not put multiple Markdown elements on the same line`;
 
-  //console.log("Req is: ", SYSTEM_PROMPT + " Ingredients are: " + ingredients);
+  const preferences = [
+    options.vegetarian ? "The recipe must be vegetarian." : "",
+    `Spice level: ${options.spiceLevel}.`,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   const ai = new GoogleGenAI({ apiKey: key });
 
   const interaction = await ai.models.generateContent({
     model: "gemini-flash-latest",
-    contents: SYSTEM_PROMPT + " Ingredients are: " + ingredients,
+    contents:
+      SYSTEM_PROMPT +
+      " Ingredients are: " +
+      ingredients +
+      ". Preferences: " +
+      preferences,
   });
 
-  //console.log("AI Response: ", interaction.text);
   return interaction.text;
 }
