@@ -1,6 +1,8 @@
-import { Bookmark, CookingPot } from "lucide-react";
+import { Bookmark } from "lucide-react";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import DishImage from "./DishImage";
+import { RECIPE_PROSE_CLASSNAME } from "../constants";
 import type { GeneratedRecipe } from "../types";
 
 export default function Recipe({
@@ -10,10 +12,7 @@ export default function Recipe({
   recipe: GeneratedRecipe;
   onSave: (recipe: GeneratedRecipe) => void;
 }) {
-  console.log("recipe image: ", recipe.imageURL);
   const [saved, setSaved] = useState(false);
-  const proseClassName =
-    "font-work-sans prose prose-sm  prose-h1:font-serif prose-h1:font-semibold prose-h2:font-semibold prose-h3:font-normal leading-5 prose-h1:text-2xl prose-h2:text-xl prose-h3:text-medium prose-h1:mb-2 prose-h2:mb-2 prose-h3:mb-1 prose-hr:my-4 prose-p:mb-1 prose-h3:text-orange-700 prose-h1:text-orange-700";
 
   function handleSave() {
     onSave(recipe);
@@ -50,30 +49,21 @@ export default function Recipe({
         </div>
       </div>
       <div className="flex flex-row gap-6">
-        <div className={`${proseClassName} min-w-0 flex-1 basis-0`}>
+        <div className={`${RECIPE_PROSE_CLASSNAME} min-w-0 flex-1 basis-0`}>
           <h2 className="mb-3 font-work-sans text-2xl font-extrabold tracking-tight text-gray-900">
             Ingredients
           </h2>
           <ReactMarkdown>{recipe.ingredients}</ReactMarkdown>
         </div>
         <div className="min-w-0 flex-1 basis-0 overflow-hidden rounded-lg">
-          {recipe.imageURL ? (
-            <img
-              src={recipe.imageURL}
-              alt="Generated preview of the finished dish"
-              className="h-full min-h-40 w-full object-cover"
-            />
-          ) : (
-            <div className="flex h-full min-h-40 w-full items-center justify-center bg-gradient-to-br from-orange-200 via-red-200 to-orange-300">
-              <CookingPot
-                className="h-10 w-10 text-white/80"
-                strokeWidth={1.5}
-              />
-            </div>
-          )}
+          <DishImage
+            src={recipe.imageUrl}
+            alt="Generated preview of the finished dish"
+            className="h-full min-h-40 w-full"
+          />
         </div>
       </div>
-      <div className={`${proseClassName} max-w-none`}>
+      <div className={`${RECIPE_PROSE_CLASSNAME} max-w-none`}>
         <ReactMarkdown>{recipe.instructions}</ReactMarkdown>
       </div>
     </div>

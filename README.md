@@ -1,75 +1,74 @@
-# React + TypeScript + Vite
+# ChefMate
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tell it what's in your kitchen, and it turns those ingredients into a full recipe — written out, plated, and photographed by AI — that you can save to a personal cookbook.
 
-Currently, two official plugins are available:
+## What it does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Ingredient input** — add what you have (with quick-add suggestions for common staples), and set preferences (vegetarian, spice level).
+- **AI recipe generation** — an LLM turns your ingredients + preferences into a complete recipe: name, description, ingredient list, step-by-step instructions, cuisine, cook time, and servings.
+- **AI dish photography** — a second AI call generates a photo of the finished dish, styled to look like a home cook's own photo rather than a staged studio shot.
+- **Personal cookbook** — save generated recipes, browse them as a grid of cards, open a full recipe page, or delete ones you don't want anymore.
 
-## React Compiler
+## How it's built
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+A two-part app: a React single-page app talks to an Express API, which in turn talks to OpenRouter (for AI generation) and Supabase (for the database and image storage).
 
 ```
+┌─────────────┐      HTTP       ┌─────────────┐
+│  frontend/  │ ───────────────▶│  backend/   │
+│  React SPA  │◀─────────────── │  Express API│
+└─────────────┘                 └──────┬──────┘
+                                        │
+                        ┌───────────────┼────────────────┐
+                        ▼               ▼                ▼
+                  OpenRouter      Supabase Postgres  Supabase Storage
+                (recipe text +      (saved recipes)    (dish photos)
+                 dish images)
+```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+### Tech stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**Frontend** — React 19, TypeScript, Vite, Tailwind CSS v4, React Router, react-markdown, react-hot-toast, lucide-react.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Backend** — Node.js, Express 5, TypeScript, Drizzle ORM, `postgres`, `@supabase/supabase-js`, OpenRouter SDK.
+
+**AI models (via [OpenRouter](https://openrouter.ai))** — Gemini for recipe text, Gemini's image model for dish photos.
+
+**Data** — Postgres + Storage, both hosted on [Supabase](https://supabase.com).
+
+## Project structure
 
 ```
+what-can-i-cook/
+├── frontend/   # React + Vite SPA — see frontend/README.md
+└── backend/    # Express API — see backend/README.md
+```
+
+## Getting started
+
+You'll need:
+- Node.js 22+ (see each subproject's README for the exact requirement)
+- A [Supabase](https://supabase.com) project (Postgres database + Storage)
+- An [OpenRouter](https://openrouter.ai) API key
+
+Then, in two terminals:
+
+```bash
+# Backend
+cd backend
+npm install
+cp .env.example .env   # fill in the values — see backend/README.md
+npm run dev             # http://localhost:3000
+
+# Frontend
+cd frontend
+npm install
+cp .env.example .env   # optional — defaults work for local dev
+npm run dev             # http://localhost:5173
+```
+
+Full setup details (database schema, storage bucket, every environment variable) are in [`backend/README.md`](backend/README.md) and [`frontend/README.md`](frontend/README.md).
+
+## License
+
+[MIT](LICENSE)

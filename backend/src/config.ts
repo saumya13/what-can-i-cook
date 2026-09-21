@@ -11,7 +11,7 @@ function requireEnv(name: string): string {
 export const config = {
   port: Number(process.env.PORT) || 3000,
   openrouter: {
-    apiKey: requireEnv("OPENROUTER_API_KEY_PAID"),
+    apiKey: requireEnv("OPENROUTER_API_KEY"),
     recipeModel: "google/gemini-3.8-flash",
     imageModel: "google/gemini-3.1-flash-image",
     imageEndpoint: "https://openrouter.ai/api/v1/images",

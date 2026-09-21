@@ -28,5 +28,10 @@ export interface GeneratedRecipe {
   cuisine: string;
   cookTime: string;
   servings: string;
-  imageURL: string;
+  imageUrl: string;
+}
+
+export interface GenerateRecipeRequest {
+  ingredients: string[];
+  preferences: RecipeOptions;
 }

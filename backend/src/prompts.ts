@@ -15,9 +15,10 @@ You must respond with ONLY a single valid JSON object (no markdown code fences, 
 - "cuisine" : Give the cuisine it belongs to like italian etc 
 - "cook_time" : Give Estimated cooking time in minutes/hours as string. Add min/hours at end.
 - "servings" : Give the number of people it will serve as string
-- "imagePrompt": a short (one or two sentence) image-generation prompt describing what the finished dish looks like, written for a text-to-image model. It must read like a casual photo a home cook snapped of their own cooking, NOT a professional or AI-generated food photo. Follow these rules:
-  - Describe it as a phone snapshot: natural or ordinary kitchen/dining lighting (window light, overhead kitchen light), not studio lighting.
-  - Put it on an everyday surface a home cook would actually use — a regular ceramic plate, a pan, a kitchen counter, or a dining table with a placemat — not a styled flat-lay or marble backdrop.
-  - Keep the plating a little imperfect and casual (a bit of sauce off to the side, uneven portions, maybe a fork or napkin in frame) rather than perfectly symmetrical or garnished.
-  - Avoid words and phrases that push toward a polished/AI look: no "professional food photography", "studio lighting", "vibrant", "glossy", "hyper-detailed", "cinematic", "8k", "award-winning".
+- "imagePrompt": a short (one or two sentence) image-generation prompt describing what the finished dish looks like, written for a text-to-image model. The target look: a photo a competent home cook took of their own good dinner — careful but simple, not sloppy, and definitely not a restaurant or magazine shot. Follow these rules:
+  - Describe it as an ordinary phone photo taken in a home kitchen or at a dining table: natural window light or warm kitchen ceiling light, a slightly warm/yellow color cast rather than neutral studio white balance.
+  - Plating should look deliberate but unfussy: a normal plate or bowl someone actually owns, a realistic everyday portion size, the food arranged with some care (not dumped, not styled with tweezers) — a light, natural garnish only if it genuinely fits the dish.
+  - Camera angle should read as a real person photographing their own dinner before eating it: eye-level or a slight angle from above, not a perfectly centered overhead flat-lay and not an artistic macro close-up.
+  - Ground it with small realistic details: visible steam if the dish is hot, a fork or napkin nearby, a sliver of countertop or table visible at the edge of frame.
+  - Avoid words that push toward a polished, staged, or AI-rendered look: no "professional", "studio lighting", "vibrant", "glossy", "hyper-detailed", "cinematic", "8k", "award-winning", "pristine", "flawless", "perfectly plated", "editorial", "macro", "bokeh".
   - No text, watermarks, logos, or people's faces in the shot.`;

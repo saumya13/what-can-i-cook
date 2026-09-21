@@ -1,11 +1,12 @@
-import { CookingPot, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import DishImage from "./DishImage";
 
 interface RecipeCardProps {
   id: number;
   name: string;
   description: string;
-  imageURL: string | null;
+  imageUrl: string | null;
   onDelete: (id: number) => void;
 }
 
@@ -13,7 +14,7 @@ export default function RecipeCard({
   id,
   name,
   description,
-  imageURL,
+  imageUrl,
   onDelete,
 }: RecipeCardProps) {
   function handleDelete() {
@@ -25,17 +26,7 @@ export default function RecipeCard({
   return (
     <div className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm font-work-sans tracking-wide">
       <div className="relative h-40 w-full shrink-0 overflow-hidden">
-        {imageURL ? (
-          <img
-            src={imageURL}
-            alt={`Photo of ${name}`}
-            className="h-full w-full object-cover"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-orange-200 via-red-200 to-orange-300">
-            <CookingPot className="h-12 w-12 text-white/80" strokeWidth={1.5} />
-          </div>
-        )}
+        <DishImage src={imageUrl} alt={`Photo of ${name}`} className="h-full w-full" />
         <button
           type="button"
           onClick={handleDelete}

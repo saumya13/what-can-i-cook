@@ -1,12 +1,12 @@
-import { ArrowLeft, CookingPot } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import DishImage from "../components/DishImage";
 import NavBar from "../components/NavBar";
+import * as api from "../lib/api";
+import { RECIPE_PROSE_CLASSNAME } from "../constants";
 import type { SavedRecipe } from "../types";
-
-const proseClassName =
-  "font-work-sans prose prose-sm prose-h1:font-serif prose-h1:font-semibold prose-h2:font-semibold prose-h3:font-normal leading-5 prose-h1:text-2xl prose-h2:text-xl prose-h3:text-medium prose-h1:mb-2 prose-h2:mb-2 prose-h3:mb-1 prose-hr:my-4 prose-p:mb-1 prose-h3:text-orange-700 prose-h1:text-orange-700";
 
 export default function RecipePage() {
   const { id } = useParams();
@@ -18,20 +18,13 @@ export default function RecipePage() {
     async function loadRecipe() {
       setLoading(true);
       setNotFound(false);
+      if (!id) {
+        setNotFound(true);
+        setLoading(false);
+        return;
+      }
       try {
-        const response = await fetch(`http://localhost:3000/api/recipes/${id}`);
-
-        if (response.status === 404) {
-          setNotFound(true);
-          return;
-        }
-
-        if (!response.ok) {
-          throw new Error(`Failed to load recipe: ${response.status}`);
-        }
-
-        const data: SavedRecipe = await response.json();
-        setRecipe(data);
+        setRecipe(await api.getSavedRecipe(id));
       } catch (error) {
         console.error("Something went wrong: ", error);
         setNotFound(true);
@@ -114,31 +107,22 @@ export default function RecipePage() {
           </div>
 
           <div className="flex flex-row gap-6">
-            <div className={`${proseClassName} min-w-0 flex-1 basis-0`}>
+            <div className={`${RECIPE_PROSE_CLASSNAME} min-w-0 flex-1 basis-0`}>
               <h2 className="mb-3 font-work-sans text-2xl font-extrabold tracking-tight text-gray-900">
                 Ingredients
               </h2>
               <ReactMarkdown>{recipe.ingredients}</ReactMarkdown>
             </div>
             <div className="min-w-0 flex-1 basis-0 overflow-hidden rounded-lg">
-              {recipe.imageUrl ? (
-                <img
-                  src={recipe.imageUrl}
-                  alt={`Photo of ${recipe.name}`}
-                  className="h-full min-h-40 w-full object-cover"
-                />
-              ) : (
-                <div className="flex h-full min-h-40 w-full items-center justify-center bg-gradient-to-br from-orange-200 via-red-200 to-orange-300">
-                  <CookingPot
-                    className="h-10 w-10 text-white/80"
-                    strokeWidth={1.5}
-                  />
-                </div>
-              )}
+              <DishImage
+                src={recipe.imageUrl}
+                alt={`Photo of ${recipe.name}`}
+                className="h-full min-h-40 w-full"
+              />
             </div>
           </div>
 
-          <div className={`${proseClassName} max-w-none`}>
+          <div className={`${RECIPE_PROSE_CLASSNAME} max-w-none`}>
             <ReactMarkdown>{recipe.instructions}</ReactMarkdown>
           </div>
         </div>

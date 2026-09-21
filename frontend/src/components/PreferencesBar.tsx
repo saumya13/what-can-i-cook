@@ -21,7 +21,6 @@ export default function PreferencesBar({
 }: PreferencesBarProps) {
   return (
     <div className="flex w-full flex-col items-center gap-3 font-work-sans">
-      {/* <span className="text-sm font-semibold text-gray-700">Preferences</span> */}
       <div className="flex flex-wrap items-center justify-center gap-3 font-work-sans">
         <label className="flex h-9 items-center gap-2 rounded-xl border border-gray-300 bg-white px-3 text-sm text-gray-700 hover:bg-green-50 hover:border-green-600">
           <input

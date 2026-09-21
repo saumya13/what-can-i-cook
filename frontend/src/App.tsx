@@ -1,16 +1,16 @@
 import { RotateCcw } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-//import getRecipeFromClaude from "./ai";
 import Cookbook from "./components/Cookbook";
 import GetRecipe from "./components/GetRecipe";
 import Hero from "./components/Hero";
-import Loading from "./components/Loading";
 import NavBar from "./components/NavBar";
 import PreferencesBar from "./components/PreferencesBar";
 import QuickAddSuggestions from "./components/QuickAddSuggestions";
 import Recipe from "./components/Recipe";
+import RecipeSkeleton from "./components/RecipeSkeleton";
 import Search from "./components/SearchSection";
+import * as api from "./lib/api";
 import {
   DEFAULT_RECIPE_OPTIONS,
   type SavedRecipe,
@@ -27,21 +27,14 @@ function App() {
   const [savedRecipes, setSavedRecipes] = useState<SavedRecipe[]>([]);
   const loadingRef = useRef<HTMLDivElement>(null);
 
-  async function fetchSavedRecipes(): Promise<SavedRecipe[]> {
-    const response = await fetch("http://localhost:3000/api/recipes");
-
-    if (!response.ok) {
-      throw new Error(`Failed to load recipes: ${response.status}`);
-    }
-
-    return response.json();
-  }
-
   useEffect(() => {
     async function loadSavedRecipes() {
-      const recipes = await fetchSavedRecipes();
-      console.log("Res: ", recipes);
-      setSavedRecipes(recipes);
+      try {
+        setSavedRecipes(await api.getSavedRecipes());
+      } catch (error) {
+        toast.error("Couldn't load your cookbook");
+        console.error("Something went wrong: ", error);
+      }
     }
     loadSavedRecipes();
   }, []);
@@ -58,60 +51,23 @@ function App() {
   async function generateRecipe() {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3000/api/recipe/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ingredients: ingredients,
-          preferences: options,
-        }),
-      });
-      const output = await res.json();
-
-      if (!res.ok || output?.error) {
-        throw new Error(output?.error ?? "Failed to generate a recipe");
-      }
-
-      setRecipe({
-        name: output.name,
-        ingredients: output.ingredients,
-        description: output.description,
-        instructions: output.instructions,
-        cuisine: output.cuisine,
-        cookTime: output.cook_time,
-        servings: output.servings,
-        imageURL: output.imageURL,
-      });
+      setRecipe(await api.generateRecipe({ ingredients, preferences: options }));
       setIngredients([]);
     } catch (error) {
-      toast.error("The Claude API is busy...");
+      toast.error(
+        error instanceof Error ? error.message : "Failed to generate a recipe",
+      );
       console.error("Something went wrong: ", error);
     } finally {
       setLoading(false);
     }
   }
 
-  async function saveRecipe(recipe: GeneratedRecipe) {
+  async function saveRecipe(recipeToSave: GeneratedRecipe) {
     try {
-      const res = await fetch("http://localhost:3000/api/recipes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(recipe),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error("Failed to save a recipe: ", data.error);
-      }
-
-      toast.success("Recipe saved to your cookbook! ", data);
-      const recipes = await fetchSavedRecipes();
-      setSavedRecipes(recipes);
+      await api.saveRecipe(recipeToSave);
+      toast.success("Recipe saved to your cookbook!");
+      setSavedRecipes(await api.getSavedRecipes());
     } catch (error) {
       toast.error("Error saving the recipe");
       console.error("Something went wrong: ", error);
@@ -120,14 +76,7 @@ function App() {
 
   async function deleteRecipe(id: number) {
     try {
-      const res = await fetch(`http://localhost:3000/api/recipes/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to delete the recipe");
-      }
-
+      await api.deleteRecipe(id);
       setSavedRecipes((prev) => prev.filter((recipe) => recipe.id !== id));
       toast.success("Recipe removed from your cookbook");
     } catch (error) {
@@ -190,9 +139,11 @@ function App() {
               recipeGenerated={recipe !== null}
             />
           </div>
-          <div ref={loadingRef} className="scroll-mt-20">
-            {loading ? <Loading /> : null}
-          </div>
+          {loading ? (
+            <div ref={loadingRef} className="mx-1 w-full scroll-mt-20">
+              <RecipeSkeleton />
+            </div>
+          ) : null}
           {recipe ? (
             <div className="mx-1 flex w-full flex-col gap-4">
               <Recipe recipe={recipe} onSave={saveRecipe} />

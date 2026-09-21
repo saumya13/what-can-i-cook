@@ -29,7 +29,7 @@ export default function Cookbook({ savedRecipes, onDelete }: CookbookProps) {
               id={recipe.id}
               name={recipe.name}
               description={recipe.description}
-              imageURL={recipe.imageUrl}
+              imageUrl={recipe.imageUrl}
               onDelete={onDelete}
             />
           ))}
