@@ -1,11 +1,11 @@
 # ChefMate — Frontend
 
-React + TypeScript single-page app, built with Vite and styled with Tailwind CSS. Talks to the [backend](../backend) API for everything — AI recipe/image generation, and saving/loading the cookbook.
+React + TypeScript single-page app, built with Vite and styled with Tailwind CSS. Talks to the backend API for everything — AI recipe/image generation, and saving/loading the cookbook.
 
 ## Prerequisites
 
 - Node.js `^20.19.0` or `>=22.12.0`
-- The [backend](../backend) running somewhere reachable (defaults to `http://localhost:3000`)
+- The backend running somewhere reachable (defaults to `http://localhost:3000`)
 
 ## Setup
 

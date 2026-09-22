@@ -40,11 +40,11 @@ Express + TypeScript API. Generates recipes and dish photos via [OpenRouter](htt
    cp .env.example .env
    ```
 
-   | Variable | Description |
-   |---|---|
-   | `OPENROUTER_API_KEY` | OpenRouter API key used for both recipe text and image generation. |
-   | `DATABASE_URL` | Postgres connection string (Supabase → Project Settings → Database). |
-   | `SUPABASE_URL` | Your Supabase project URL. |
+   | Variable                    | Description                                                                                                                    |
+   | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+   | `OPENROUTER_API_KEY`        | OpenRouter API key used for both recipe text and image generation.                                                             |
+   | `DATABASE_URL`              | Postgres connection string (Supabase → Project Settings → Database).                                                           |
+   | `SUPABASE_URL`              | Your Supabase project URL.                                                                                                     |
    | `SUPABASE_SERVICE_ROLE_KEY` | Supabase **service role** key. Server-side only — it bypasses Row Level Security, so never expose it to a client or commit it. |
 
 5. **Run it**
@@ -57,24 +57,24 @@ Express + TypeScript API. Generates recipes and dish photos via [OpenRouter](htt
 
 ## Scripts
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start the API with `tsx watch` (auto-restarts on file changes). |
-| `npm run build` | Compile TypeScript to `dist/`. |
-| `npm start` | Run the compiled build (`dist/src/server.js`) — run `build` first. |
+| Command         | Description                                                        |
+| --------------- | ------------------------------------------------------------------ |
+| `npm run dev`   | Start the API with `tsx watch` (auto-restarts on file changes).    |
+| `npm run build` | Compile TypeScript to `dist/`.                                     |
+| `npm start`     | Run the compiled build (`dist/src/server.js`) — run `build` first. |
 
 ## API reference
 
 All request/response bodies are JSON.
 
-| Method | Path | Description |
-|---|---|---|
-| `GET` | `/health` | Health check. Returns `{ "status": "ok" }`. |
-| `GET` | `/api/recipes` | List all saved recipes. |
-| `GET` | `/api/recipes/:id` | Get one saved recipe. `404` if it doesn't exist. |
-| `POST` | `/api/recipes` | Save a recipe to the cookbook. |
-| `DELETE` | `/api/recipes/:id` | Delete a saved recipe (and its stored photo, if any). |
-| `POST` | `/api/recipe/generate` | Generate a new recipe from `{ ingredients: string[], preferences: { vegetarian: boolean, spiceLevel: "mild" \| "medium" \| "hot" } }`. |
+| Method   | Path                   | Description                                                                                                                            |
+| -------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `GET`    | `/health`              | Health check. Returns `{ "status": "ok" }`.                                                                                            |
+| `GET`    | `/api/recipes`         | List all saved recipes.                                                                                                                |
+| `GET`    | `/api/recipes/:id`     | Get one saved recipe. `404` if it doesn't exist.                                                                                       |
+| `POST`   | `/api/recipes`         | Save a recipe to the cookbook.                                                                                                         |
+| `DELETE` | `/api/recipes/:id`     | Delete a saved recipe (and its stored photo, if any).                                                                                  |
+| `POST`   | `/api/recipe/generate` | Generate a new recipe from `{ ingredients: string[], preferences: { vegetarian: boolean, spiceLevel: "mild" \| "medium" \| "hot" } }`. |
 
 ## Project structure
 
