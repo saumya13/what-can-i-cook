@@ -2,6 +2,13 @@
 
 Tell it what's in your kitchen, and it turns those ingredients into a full recipe — written out, plated, and photographed by AI — that you can save to a personal cookbook.
 
+## Screenshots
+
+| | |
+|---|---|
+| ![Landing page](docs/screenshots/hero.jpg) | ![Generated recipe with AI photo](docs/screenshots/recipe-result.jpg) |
+| ![Saved cookbook grid](docs/screenshots/cookbook.jpg) | |
+
 ## What it does
 
 - **Ingredient input** — add what you have (with quick-add suggestions for common staples), and set preferences (vegetarian, spice level).
