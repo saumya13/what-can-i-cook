@@ -2,12 +2,9 @@
 
 ChefMate is an app I built for nights when I have random ingredients and no idea what to make. List what's in your kitchen, and this AI Chef will turn it into a recipe you can actually cook.
 
-## Screenshots
+## Demo
 
-|                                                       |                                                                       |
-| ----------------------------------------------------- | --------------------------------------------------------------------- |
-| ![Landing page](docs/screenshots/hero.jpg)            | ![Generated recipe with AI photo](docs/screenshots/recipe-result.jpg) |
-| ![Saved cookbook grid](docs/screenshots/cookbook.jpg) |                                                                       |
+![ChefMate demo](docs/demo/chefmate-demo.gif)
 
 ## What It Does
 
