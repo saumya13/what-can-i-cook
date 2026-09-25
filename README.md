@@ -1,9 +1,11 @@
 # ChefMate
 
 ChefMate is an app I built for nights when I have random ingredients and no idea what to make :) 
-Just throw your ingredients into ChefMate and let AI figure out what you can make. Because sometimes you have potatoes, spinach, and half an onion and absolutely no idea what that combination is trying to tell you. 🥔🥬🧅
+
+Just throw your ingredients into ChefMate and let the AI Chef figure out what you can make because sometimes you have potatoes, spinach, and half an onion and absolutely no idea what that combination is trying to tell you. 🥔🥬🧅
 
 ## Demo
+**Cute animations I made for this app:**
 
 https://github.com/user-attachments/assets/bac8795e-ab8c-4183-b8d7-f8ebf9b21dd6
 
@@ -12,7 +14,15 @@ https://github.com/user-attachments/assets/c67d8cfd-9558-4b46-aa2f-04b1587d7e04
 https://github.com/user-attachments/assets/4830343d-ce5b-490a-b8dd-40a5a7b73c4d
 
 <img width="1414" height="776" alt="Screenshot 2026-09-25 at 8 25 03 PM" src="https://github.com/user-attachments/assets/2d659710-a08e-4c24-992d-620b33a0d0a2" />
+
+**Recipe from the AI Chef:**
+
 <img width="1405" height="774" alt="Screenshot 2026-09-25 at 8 25 24 PM" src="https://github.com/user-attachments/assets/0823150e-457b-40b1-84f3-b26ca50021c0" />
+
+**Cookbook - My tasty hall of fame**
+
+Save your favourite recipes and come back to them whenever needed! 🍳
+
 <img width="1412" height="777" alt="Screenshot 2026-09-25 at 8 25 39 PM" src="https://github.com/user-attachments/assets/130b35b3-ddf5-42f6-addb-4c4052210bf7" />
 
 ## What It Does
