@@ -4,7 +4,17 @@ ChefMate is an app I built for nights when I have random ingredients and no idea
 
 ## Demo
 
-![ChefMate demo](docs/demo/chefmate-demo.gif)
+![Landing Page](docs/demo/Hero-section.mov)
+
+![Generate Recipe 1](docs/demo/add-ingredients.mov)
+
+![Generate Recipe 2](docs/demo/generate-recipe.mov)
+
+![Cookbook](docs/demo/recipes.mov)
+
+Hover the ingredient bowl on the home page to watch the ingredients gather, then click it to reveal a dish.
+
+![Ingredient bowl animation](docs/demo/ingredient-bowl.gif)
 
 ## What It Does
 
