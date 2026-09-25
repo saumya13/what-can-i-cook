@@ -1,6 +1,7 @@
 # ChefMate
 
-ChefMate is an app I built for nights when I have random ingredients and no idea what to make. List what's in your kitchen, and this AI Chef will turn it into a recipe you can actually cook.
+ChefMate is an app I built for nights when I have random ingredients and no idea what to make :) 
+Just throw your ingredients into ChefMate and let AI figure out what you can make. Because sometimes you have potatoes, spinach, and half an onion and absolutely no idea what that combination is trying to tell you. 🥔🥬🧅
 
 ## Demo
 
