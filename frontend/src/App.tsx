@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Cookbook from "./components/Cookbook";
 import GetRecipe from "./components/GetRecipe";
 import Hero from "./components/Hero";
+import IngredientBubbles from "./components/IngredientBubbles";
 import NavBar from "./components/NavBar";
 import PreferencesBar from "./components/PreferencesBar";
 import QuickAddSuggestions from "./components/QuickAddSuggestions";
@@ -111,16 +112,17 @@ function App() {
   }
 
   return (
-    <div className="flex min-h-screen bg-[#FAFAF8]">
+    <div className="flex min-h-screen bg-[#F7F6EF]">
       <Toaster position="bottom-right" />
       <div className="flex-1">
         <NavBar />
         <Hero />
-        <div className="max-w-3xl mx-auto px-6 sm:px-8 pt-8 pb-16 flex flex-col gap-8">
-          <div
-            id="search-section"
-            className="mx-auto flex w-full max-w-2xl flex-col items-center gap-4 py-12 scroll-mt-20"
-          >
+        <div
+          id="search-section"
+          className="relative flex min-h-screen w-full flex-col items-center justify-center gap-16 px-6 py-16 sm:px-8"
+        >
+          <IngredientBubbles />
+          <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center gap-4">
             <Search
               ingredients={ingredients}
               setIngredients={setIngredients}
@@ -131,7 +133,10 @@ function App() {
             <PreferencesBar options={options} onChange={setOptions} />
             <QuickAddSuggestions onQuickAdd={addIngredient} />
           </div>
-          <div id="get-recipe-section" className="mx-1 scroll-mt-20">
+          <div
+            id="get-recipe-section"
+            className="relative z-10 mx-1 w-full max-w-2xl scroll-mt-20"
+          >
             <GetRecipe
               generateRecipe={generateRecipe}
               loading={loading}
@@ -139,6 +144,8 @@ function App() {
               recipeGenerated={recipe !== null}
             />
           </div>
+        </div>
+        <div className="max-w-3xl mx-auto px-6 sm:px-8 pb-16 flex flex-col gap-8">
           {loading ? (
             <div ref={loadingRef} className="mx-1 w-full scroll-mt-20">
               <RecipeSkeleton />

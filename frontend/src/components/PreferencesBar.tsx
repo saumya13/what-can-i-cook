@@ -1,3 +1,4 @@
+import { Leaf } from "lucide-react";
 import type { RecipeOptions } from "../types";
 
 interface PreferencesBarProps {
@@ -20,17 +21,18 @@ export default function PreferencesBar({
   onChange,
 }: PreferencesBarProps) {
   return (
-    <div className="flex w-full flex-col items-center gap-3 font-work-sans">
-      <div className="flex flex-wrap items-center justify-center gap-3 font-work-sans">
-        <label className="flex h-9 items-center gap-2 rounded-xl border border-gray-300 bg-white px-3 text-sm text-gray-700 hover:bg-green-50 hover:border-green-600">
+    <div className="flex w-full flex-col items-center gap-3">
+      <div className="flex flex-wrap items-center justify-center gap-3">
+        <label className="flex h-9 items-center gap-2 rounded-xl border border-gray-300 bg-white px-3 text-sm text-gray-700 hover:border-[#A7C492] hover:bg-[#A7C492]/15">
           <input
             type="checkbox"
             checked={options.vegetarian}
             onChange={(e) =>
               onChange({ ...options, vegetarian: e.target.checked })
             }
-            className="h-4 w-4 accent-green-700"
+            className="h-4 w-4 accent-[#A7C492]"
           />
+          <Leaf size={16} className="text-[#6f9a58]" aria-hidden="true" />
           Vegetarian
         </label>
 

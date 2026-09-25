@@ -37,7 +37,7 @@ export default function RecipePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#FAFAF8]">
+      <div className="min-h-screen bg-[#F7F6EF]">
         <NavBar />
         <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:px-8">
           <p className="text-lg text-gray-700">Loading recipe...</p>
@@ -48,7 +48,7 @@ export default function RecipePage() {
 
   if (notFound || !recipe) {
     return (
-      <div className="min-h-screen bg-[#FAFAF8]">
+      <div className="min-h-screen bg-[#F7F6EF]">
         <NavBar />
         <div className="mx-auto max-w-3xl px-6 py-16 text-center sm:px-8">
           <p className="text-lg text-gray-700">Recipe not found.</p>
@@ -64,7 +64,7 @@ export default function RecipePage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8]">
+    <div className="min-h-screen bg-[#F7F6EF]">
       <NavBar />
       <div className="mx-auto max-w-3xl px-6 pb-16 pt-8 sm:px-8">
         <Link
@@ -78,7 +78,7 @@ export default function RecipePage() {
         <div className="flex flex-col gap-6 rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
           <div className="flex flex-col gap-2 border-b border-gray-300 pb-5">
             <span className="text-sm text-gray-500">From your cookbook:</span>
-            <h1 className="font-serif text-3xl text-orange-700">
+            <h1 className="font-serif text-4xl font-medium tracking-tight text-orange-700">
               {recipe.name}
             </h1>
             {recipe.description ? (
@@ -108,7 +108,7 @@ export default function RecipePage() {
 
           <div className="flex flex-row gap-6">
             <div className={`${RECIPE_PROSE_CLASSNAME} min-w-0 flex-1 basis-0`}>
-              <h2 className="mb-3 font-work-sans text-2xl font-extrabold tracking-tight text-gray-900">
+              <h2 className="mb-3 font-serif text-3xl font-semibold tracking-tight text-gray-900">
                 Ingredients
               </h2>
               <ReactMarkdown>{recipe.ingredients}</ReactMarkdown>

@@ -21,9 +21,11 @@ export default function GetRecipe({
       : undefined;
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 bg-[#F0EFEB] rounded-xl px-8 py-6 font-work-sans tracking-wide">
+    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 border border-orange-600 bg-orange-50 rounded-xl px-8 py-6 tracking-wide">
       <div className="flex flex-col gap-2">
-        <span className="text-lg">Ready for the recipe?</span>
+        <span className="font-serif text-2xl font-medium tracking-tight">
+          Ready for the recipe?
+        </span>
         <span className="text-[#6B7280] text-sm">
           Generate a recipe from your list of ingredients.
         </span>

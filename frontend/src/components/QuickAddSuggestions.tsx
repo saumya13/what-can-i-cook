@@ -7,6 +7,10 @@ const QUICK_ADD_SUGGESTIONS = [
   "Tofu",
   "Ginger",
   "Potatoes",
+  "Noodles",
+  "Carrots",
+  "Spices",
+  "Rice",
 ];
 
 interface QuickAddSuggestionsProps {
@@ -17,14 +21,14 @@ export default function QuickAddSuggestions({
   onQuickAdd,
 }: QuickAddSuggestionsProps) {
   return (
-    <div className="flex w-full flex-wrap items-baseline justify-center gap-2 text-center font-work-sans tracking-wide">
-      <span className="text-sm text-gray-500 font-work-sans">Quick add:</span>
+    <div className="flex w-full flex-wrap items-baseline justify-center gap-2 text-center tracking-wide">
+      <span className="text-sm text-gray-500">Quick add:</span>
       {QUICK_ADD_SUGGESTIONS.map((item) => (
         <button
           key={item}
           type="button"
           onClick={() => onQuickAdd(item)}
-          className="inline-flex items-center gap-1 rounded-xl border border-[#4D7C5A] bg-[#EFF5F1] px-3 py-1.5 text-sm text-[#3F6449] hover:bg-[#D3E4D8]"
+          className="inline-flex items-center gap-1 rounded-xl border border-[#A7C492] bg-[#A7C492]/15 px-3 py-1.5 text-sm text-[#4B6B3A] hover:bg-[#A7C492]/30"
         >
           <Plus size={14} />
           {item}

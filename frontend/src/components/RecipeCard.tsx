@@ -24,9 +24,13 @@ export default function RecipeCard({
   }
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm font-work-sans tracking-wide">
-      <div className="relative h-40 w-full shrink-0 overflow-hidden">
-        <DishImage src={imageUrl} alt={`Photo of ${name}`} className="h-full w-full" />
+    <div className="group flex flex-col rounded-2xl border-1 border-[#E7E4D0] bg-[#F7F6EF] p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-xl bg-[#A7C492]/12 ">
+        <DishImage
+          src={imageUrl}
+          alt={`Photo of ${name}`}
+          className="h-full w-full"
+        />
         <button
           type="button"
           onClick={handleDelete}
@@ -37,12 +41,14 @@ export default function RecipeCard({
           <Trash2 size={16} />
         </button>
       </div>
-      <div className="flex flex-1 flex-col gap-3 p-5">
-        <h3 className="text-lg font-medium text-gray-900">{name}</h3>
-        <p className="flex-1 text-sm text-gray-600 font-serif">{description}</p>
+      <div className="flex flex-1 flex-col gap-2 pt-4">
+        <h3 className="font-serif text-xl font-normal tracking-tight text-gray-800">
+          {name}
+        </h3>
+        <p className="flex-1 text-sm text-gray-500">{description}</p>
         <Link
           to={`/recipes/${id}`}
-          className="inline-flex h-10 items-center justify-center rounded-md bg-orange-600 px-4 text-sm font-medium text-white hover:bg-orange-700"
+          className="mt-1 flex h-11 w-full items-center justify-center gap-2 rounded-lg border border-[#A7C492]/60 bg-[#A7C492]/20 text-sm font-semibold text-[#4f6f3c] transition-colors hover:bg-orange-200 hover:border-orange-300 group-hover:border-orange-200 group-hover:bg-orange-100 group-hover:text-orange-700"
         >
           View Recipe
         </Link>

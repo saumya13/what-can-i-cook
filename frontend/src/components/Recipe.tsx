@@ -26,7 +26,7 @@ export default function Recipe({
           Your Personal Chef recommends:
         </span>
         <div className="flex items-center justify-between gap-4">
-          <h1 className="font-serif text-3xl text-orange-700">{recipe.name}</h1>
+          <h1 className="font-serif text-4xl font-medium tracking-tight text-orange-700">{recipe.name}</h1>
           <div className="group relative">
             <button
               type="button"
@@ -50,7 +50,7 @@ export default function Recipe({
       </div>
       <div className="flex flex-row gap-6">
         <div className={`${RECIPE_PROSE_CLASSNAME} min-w-0 flex-1 basis-0`}>
-          <h2 className="mb-3 font-work-sans text-2xl font-extrabold tracking-tight text-gray-900">
+          <h2 className="mb-3 font-serif text-3xl font-semibold tracking-tight text-gray-900">
             Ingredients
           </h2>
           <ReactMarkdown>{recipe.ingredients}</ReactMarkdown>
